@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+<h2>Edit Your Profile</h2>
+
+{% for msg in app.flashes('success') %}
+    <div class="alert alert-success">{{ msg }}</div>
+{% endfor %}
+
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.dob) }}
+    {{ form_row(form.gender) }}
+    <button class="btn btn-primary">Save Changes</button>
+{{ form_end(form) }}
+
+<a href="{{ path('student_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

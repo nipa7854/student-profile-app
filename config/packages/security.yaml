@@ -1,0 +1,64 @@
+security:
+    providers:
+        # 👨‍🎓 Student provider
+        app_user_provider:
+            entity:
+                class: App\Entity\Student
+                property: email
+
+        # 🛡️ Admin provider
+        admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+
+    firewalls:
+        # 🔐 Admin firewall
+        admin:
+            pattern: ^/admin
+            provider: admin_provider
+            lazy: true
+            custom_authenticators:
+                - App\Security\AdminLoginFormAuthenticator
+            entry_point: App\Security\AdminLoginFormAuthenticator
+            form_login:
+                login_path: admin_login
+                check_path: admin_login
+            logout:
+                path: admin_logout
+                target: /
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /admin
+
+        # 👨‍🎓 Student firewall
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticators:
+                - App\Security\LoginFormAuthenticator
+            entry_point: App\Security\LoginFormAuthenticator
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: logout
+                target: /
+
+    access_control:
+        # ✅ Public access to login/register
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/register, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/dashboard, roles: ROLE_STUDENT }
+
+    password_hashers:
+        App\Entity\Student:
+            algorithm: auto
+
+        App\Entity\Admin:
+            algorithm: auto
