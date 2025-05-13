@@ -3,18 +3,58 @@
 {% block title %}Student Registration{% endblock %}
 
 {% block body %}
-<h2>Register</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Student Registration</h2>
 
-{% for msg in app.flashes('success') %}
-    <div class="alert alert-success">{{ msg }}</div>
-{% endfor %}
+                    {# ✅ Success Flash Messages #}
+                    {% for msg in app.flashes('success') %}
+                        <div class="alert alert-success">{{ msg }}</div>
+                    {% endfor %}
 
-{{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.dob) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.password) }}
-    <button class="btn btn-primary">Register</button>
-{{ form_end(form) }}
+                    {{ form_start(form) }}
+
+                        <div class="mb-3">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.dob) }}
+                            {{ form_widget(form.dob, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.dob) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.gender) }}
+                            {{ form_widget(form.gender, { 'attr': {'class': 'form-select'} }) }}
+                            {{ form_errors(form.gender) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.password) }}
+                            {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.password) }}
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Register</button>
+                        </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
