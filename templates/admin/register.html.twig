@@ -3,17 +3,45 @@
 {% block title %}Admin Register{% endblock %}
 
 {% block body %}
-<h2>Register as Admin</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">🛡️ Register as Admin</h2>
 
-{% for msg in app.flashes('success') %}
-    <div class="alert alert-success">{{ msg }}</div>
-{% endfor %}
+                    {# ✅ Flash message (success) #}
+                    {% for msg in app.flashes('success') %}
+                        <div class="alert alert-success">{{ msg }}</div>
+                    {% endfor %}
 
-{{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password) }}
-    <button class="btn btn-primary">Register</button>
-{{ form_end(form) }}
+                    {{ form_start(form) }}
 
-<a href="{{ path('admin_login') }}" class="btn btn-link mt-3">Already have an account? Login</a>
+                        <div class="mb-3">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.password) }}
+                            {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.password) }}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+
+                    {{ form_end(form) }}
+
+                    <div class="text-center mt-3">
+                        <a href="{{ path('admin_login') }}" class="btn btn-link">Already have an account? Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

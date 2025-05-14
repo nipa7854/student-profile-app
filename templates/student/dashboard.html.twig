@@ -3,19 +3,42 @@
 {% block title %}Student Dashboard{% endblock %}
 
 {% block body %}
-<h2>Welcome, {{ student.name }}</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">🎓 Welcome, {{ student.name }}</h2>
 
-<ul>
-    <li><strong>Email:</strong> {{ student.email }}</li>
-    <li><strong>Date of Birth:</strong> {{ student.dob|date('Y-m-d') }}</li>
-    <li><strong>Gender:</strong> {{ student.gender }}</li>
-    <li><strong>Role:</strong> {{ student.role }}</li>
-</ul>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <strong>Email:</strong> {{ student.email }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Date of Birth:</strong> {{ student.dob|date('Y-m-d') }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Gender:</strong> {{ student.gender }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Role:</strong> {{ student.role }}
+                        </li>
+                    </ul>
 
-<div class="mt-4 d-flex gap-3">
-    <a href="{{ path('student_edit_profile') }}" class="btn btn-primary">✏️ Edit Profile</a>
-    <a href="{{ path('student_change_password') }}" class="btn btn-warning">🔐 Change Password</a>
-    <a href="{{ path('app_logout') }}" class="btn btn-danger ms-auto">🚪 Logout</a>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ path('student_edit_profile') }}" class="btn btn-primary">
+                            ✏️ Edit Profile
+                        </a>
+                        <a href="{{ path('student_change_password') }}" class="btn btn-warning">
+                            🔐 Change Password
+                        </a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-danger">
+                            🚪 Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
